@@ -1,332 +1,469 @@
-Hypothesis Testing & Statistical Analysis with Python
+# Hypothesis Testing & Statistical Analysis Using Python
 
-A practical Python-based collection of Hypothesis Testing problems covering Z-Test, T-Test, ANOVA, and Chi-Squared Test with business-oriented examples.
+## 📌 Project Overview
 
-This project contains practical statistical problem statements, hypotheses, Python implementations, assumption checks, p-value interpretation, and decision-making logic.
+This project contains practical **Hypothesis Testing** examples implemented using Python. It covers different statistical tests used in Data Analytics and Data Science to make data-driven business decisions.
 
-📌 Project Overview
+The project includes:
 
-The goal of this project is to understand how statistical hypothesis testing can be applied to real-world business and analytical problems.
+* One-Sample Z-Test
+* Two-Sample Z-Test
+* One-Sample T-Test
+* Two-Sample T-Test
+* One-Way ANOVA
+* Chi-Square Test of Independence
+* Shapiro-Wilk Test for Normality
+* Levene's Test for Equality of Variances
+* p-value interpretation
+* Null and Alternative Hypotheses
+* Type I and Type II Errors
+* Statistical significance
 
-Topics Covered
+---
 
-Null Hypothesis (H₀) and Alternative Hypothesis (H₁)
+## 🛠️ Technologies & Libraries
 
-Significance Level (α)
+* Python
+* NumPy
+* Pandas
+* SciPy
+* Statsmodels
+* Matplotlib
 
-p-value
+---
 
-Type I Error and Type II Error
+# 📊 Hypothesis Testing Workflow
 
-Statistical Power
+The general process followed in this project is:
 
-One-Sample Z-Test
+```text
+Define Business Problem
+        ↓
+Define H₀ and H₁
+        ↓
+Choose Significance Level (α)
+        ↓
+Select Statistical Test
+        ↓
+Calculate Test Statistic
+        ↓
+Calculate p-value
+        ↓
+Compare p-value with α
+        ↓
+Make Statistical Decision
+        ↓
+Business Conclusion
+```
 
-Two-Sample Z-Test
+### Decision Rule
 
-One-Sample T-Test
+```text
+If p-value ≤ 0.05
+        ↓
+Reject H₀
+        ↓
+Statistically Significant
 
-Two-Sample T-Test
+If p-value > 0.05
+        ↓
+Fail to Reject H₀
+        ↓
+Not Statistically Significant
+```
 
-Shapiro-Wilk Normality Test
+---
 
-Levene's Test for Equality of Variances
+# 1️⃣ One-Sample Z-Test
+
+A **One-Sample Z-Test** is used to determine whether the mean of a sample is significantly different from a known population mean.
+
+### Example
+
+A manufacturing company produces tablets with a target weight of **500 mg**.
+
+* Population Mean = 500 mg
+* Population Standard Deviation = 10 mg
+* Sample Size = 50
+* Sample Mean = 496 mg
+
+### Hypotheses
+
+```text
+H₀: μ = 500
+
+H₁: μ ≠ 500
+```
+
+A two-tailed Z-Test is performed to determine whether the machine has significantly deviated from the target.
+
+---
+
+# 2️⃣ Two-Sample Z-Test
+
+A **Two-Sample Z-Test** compares the means of two independent samples.
+
+## 🛒 E-Commerce A/B Testing — StyleHub
+
+### Business Problem
+
+StyleHub, a fictional online fashion retailer, wants to test whether a new checkout page can increase **Average Order Value (AOV)**.
+
+Two checkout designs are tested:
+
+* Design A → Existing checkout
+* Design B → New checkout
+
+Data is collected from **200 users for each design**.
+
+### Hypotheses
+
+```text
+H₀: μA - μB = 0
+
+There is no significant difference in AOV.
+
+H₁: μA - μB ≠ 0
+
+There is a significant difference in AOV.
+```
+
+### Test Configuration
+
+```text
+Test              : Two-Sample Z-Test
+Sample Size       : 200 per group
+Significance α    : 0.05
+Test Type         : Two-Tailed
+Metric            : Average Order Value
+```
+
+### Business Decision
+
+The p-value is compared with α = 0.05.
+
+```text
+p-value < 0.05
+→ Reject H₀
+→ Significant difference in AOV
+
+p-value ≥ 0.05
+→ Fail to Reject H₀
+→ No statistically significant difference
+```
+
+This example demonstrates how statistical testing can help an e-commerce company decide whether a new checkout design should be launched.
+
+---
+
+# 3️⃣ One-Sample T-Test
+
+A **One-Sample T-Test** is used when comparing a sample mean against a known value when the population variance is unknown.
+
+### Example: Delivery Time
+
+An online food delivery company claims:
+
+```text
+Average Delivery Time = 30 minutes
+```
+
+A sample of delivery times is collected.
+
+### Hypotheses
+
+```text
+H₀: μ = 30
+
+H₁: μ > 30
+```
+
+This is a **Right-Tailed Test** because the business wants to know whether delivery time is greater than 30 minutes.
+
+The project also demonstrates the **Shapiro-Wilk test** to check normality.
+
+---
+
+# 4️⃣ Two-Sample T-Test
+
+A Two-Sample T-Test is used to compare the means of two independent groups when population variance is unknown.
+
+### Example: Department Salaries
+
+An HR department wants to determine whether employees in Department A and Department B have different average salaries.
+
+### Hypotheses
+
+```text
+H₀: μA = μB
+
+H₁: μA ≠ μB
+```
+
+### Assumption Checks
+
+Before performing the test:
+
+1. **Shapiro-Wilk Test**
+
+   * Checks normality.
+
+2. **Levene's Test**
+
+   * Checks equality of variances.
+
+3. **Independent Two-Sample T-Test**
+
+   * Used to compare the group means.
+
+---
+
+# 5️⃣ One-Way ANOVA
+
+**ANOVA (Analysis of Variance)** is used to compare the means of **three or more independent groups**.
+
+### Example: Marketing Campaign
+
+A marketing team wants to determine whether user engagement differs across:
+
+* TikTok
+* Instagram
+* LinkedIn
+
+### Hypotheses
+
+```text
+H₀: μTikTok = μInstagram = μLinkedIn
+
+H₁: At least one group mean is different
+```
+
+### Assumptions
+
+* Data should be approximately normally distributed.
+* Groups should have similar variances.
+* Observations should be independent.
+
+### Tests Used
+
+```text
+Shapiro-Wilk
+      ↓
+Normality
+
+Levene's Test
+      ↓
+Equal Variances
 
 One-Way ANOVA
+      ↓
+Compare Group Means
+```
 
-Kruskal-Wallis Test
+If ANOVA assumptions are violated, a **Kruskal-Wallis test** can be considered.
 
-Chi-Squared Test of Independence
+---
 
-One-tailed and Two-tailed Tests
+# 6️⃣ Chi-Square Test of Independence
 
-Business interpretation of statistical results
+The **Chi-Square Test of Independence** is used to determine whether two categorical variables are associated.
 
-🧪 Statistical Testing Workflow
+### Example: Advertisement Channel vs Purchase
 
-The project follows this general hypothesis-testing process:
+A D2C company runs advertisements through:
 
-State the Null and Alternative Hypotheses
+* Instagram
+* YouTube
+* Google
 
-Select the Significance Level (α)
+The company wants to determine whether the advertisement channel is associated with the customer's purchase decision.
 
-Choose the Appropriate Statistical Test
+### Variables
 
-Calculate the Test Statistic
-
-Calculate the p-value
-
-Compare p-value with α
-
-Make a statistical decision
-
-Interpret the result in a business context
-
-Decision Rule
-
-p-value ≤ 0.05 → Reject H₀
-
-p-value > 0.05 → Fail to Reject H₀
-
-📊 Projects & Business Problem Statements
-
-1. E-Commerce A/B Testing — Average Order Value
-
-Business Problem:StyleHub, an online fashion retailer, is testing a new checkout page design (Design B) against the existing Design A. The objective is to determine whether there is a statistically significant difference in Average Order Value (AOV).
-
-Sample:
-
-Design A: 200 users
-
-Design B: 200 users
-
-Hypotheses:
-
-H₀: μA − μB = 0
-
-H₁: μA − μB ≠ 0
-
-Test Used: Two-Sample Z-TestSignificance Level: α = 0.05Test Type: Two-tailed
-
-The Python implementation simulates AOV data for both designs and uses a two-sample Z-test to evaluate whether the observed difference is statistically significant.
-
-2. Manufacturing Quality Control
-
-Tests whether a pharmaceutical tablet's average active ingredient content differs from the target of 500 mg when the population standard deviation is known.
-
-Test: One-Sample Z-Test
-
-3. Food Manufacturing Quality Assurance
-
-Tests whether the average weight of energy bars differs from the advertised target of 50 grams.
-
-Test: One-Sample Z-Test
-
-4. Resting Heart Rate Analysis
-
-Tests whether the average resting heart rate of a sample is below a known population mean.
-
-Test: Left-Tailed One-Sample Z-Test
-
-5. Cloud Service SLA Analysis
-
-Tests whether average monthly cloud-service uptime differs from a 99.9% SLA guarantee.
-
-Test: Two-Tailed One-Sample Z-Test
-
-6. Zomato Delivery Time Analysis
-
-Tests whether the average delivery time is greater than the claimed 30 minutes.
-
-Test: One-Sample T-TestAlternative: Right-tailed
-
-The project also demonstrates the Shapiro-Wilk test for checking normality.
-
-7. Beverage Quality Control
-
-Tests whether the average soda-can content differs from the claimed 330 ml.
-
-Test: One-Sample T-Test
-
-8. Call Center Efficiency
-
-Evaluates whether a new employee training program significantly changes Average Handle Time (AHT) from the 300-second KPI.
-
-Test: One-Sample T-Test
-
-9. Employee Salary Comparison
-
-Compares average monthly salaries between two departments.
-
-Test: Independent Two-Sample T-Test
-
-Assumptions checked using:
-
-Shapiro-Wilk Test
-
-Levene's Test
-
-Welch's t-test is used when equal variance cannot be assumed.
-
-10. App Download Size Comparison
-
-Compares average app download sizes between Apple's App Store and Google's Play Store using a sample of matched apps.
-
-Test: Independent Two-Sample T-Test
-
-11. Customer Spending Analysis
-
-Tests whether average order value differs between male and female customers.
-
-Test: Independent Two-Sample T-TestTest Type: Two-tailed
-
-12. Battery Supplier Comparison
-
-Compares battery life between two suppliers using small samples.
-
-Test: Independent Two-Sample T-Test
-
-Because the sample size is below 30, a t-test is used instead of a Z-test.
-
-13. Marketing Campaign Effectiveness
-
-Compares user engagement scores across TikTok, Instagram, and LinkedIn.
-
-Test: One-Way ANOVA
-
-Assumptions checked using:
-
-Shapiro-Wilk Test
-
-Levene's Test
-
-If ANOVA assumptions are seriously violated, the project considers the Kruskal-Wallis test.
-
-14. Employee Training Program Analysis
-
-Compares performance scores across three training programs:
-
-Online
-
-In-Person
-
-Blended
-
-Test: One-Way ANOVA
-
-15. Cloud Provider Upload Speed Analysis
-
-Compares upload speeds across:
-
-AWS
-
-Azure
-
-Google Cloud Platform
-
-Test: One-Way ANOVA
-
-The project also includes visualization of group distributions and mean upload speeds.
-
-16. Store Customer Wait-Time Analysis
-
-Tests whether average customer wait time differs across four store locations.
-
-Test: One-Way ANOVA
-
-17. Advertising Channel & Purchase Decision
-
-Tests whether advertising channel is associated with purchase decision.
-
-Categorical Variables:
-
+```text
 Ad Channel
+→ Instagram
+→ YouTube
+→ Google
 
 Purchase Decision
+→ Purchased
+→ Not Purchased
+```
 
-Test: Chi-Squared Test of Independence
+### Hypotheses
 
-18. Cuisine Type & Customer Satisfaction
+```text
+H₀:
+Ad Channel and Purchase Decision are independent.
 
-Tests whether cuisine type is associated with customer satisfaction.
+H₁:
+Ad Channel and Purchase Decision are not independent.
+```
 
-Test: Chi-Squared Test of Independence
+If the p-value is less than 0.05, there is evidence of a statistically significant association.
 
-19. Housing Status & Loan Default Risk
+---
 
-Tests whether housing status is associated with loan default status.
+# 📚 Other Business Problems Covered
 
-Test: Chi-Squared Test of Independence
+The project also contains practical statistical examples from different domains:
 
-🛠️ Technologies Used
+| Domain             | Business Problem               | Statistical Test  |
+| ------------------ | ------------------------------ | ----------------- |
+| Manufacturing      | Tablet weight calibration      | One-Sample Z-Test |
+| Food Manufacturing | Energy bar weight              | One-Sample Z-Test |
+| Healthcare         | Resting heart rate             | One-Sample Z-Test |
+| Cloud Computing    | SLA uptime                     | One-Sample Z-Test |
+| E-Commerce         | Checkout A/B Testing           | Two-Sample Z-Test |
+| Food Delivery      | Delivery time                  | One-Sample T-Test |
+| HR                 | Department salaries            | Two-Sample T-Test |
+| Mobile Apps        | App download size              | Two-Sample T-Test |
+| Manufacturing      | Battery supplier comparison    | Two-Sample T-Test |
+| Marketing          | Social media engagement        | ANOVA             |
+| HR                 | Training program effectiveness | ANOVA             |
+| Cloud Computing    | Upload speed comparison        | ANOVA             |
+| Retail             | Store waiting time             | ANOVA             |
+| Marketing          | Ad channel vs purchase         | Chi-Square        |
+| Banking            | Housing status vs loan default | Chi-Square        |
 
-Python
+---
 
-NumPy
+# 📈 Statistical Concepts Covered
 
-Pandas
+## Null Hypothesis (H₀)
 
-SciPy
+The default assumption that there is **no significant difference or relationship**.
 
-Statsmodels
+## Alternative Hypothesis (H₁)
 
-Matplotlib
+The claim that there **is a significant difference or relationship**.
 
-📁 Project Structure
+## Significance Level (α)
 
-hypothesis-testing/
-│
-├── hypothesis_testing_problem_statements.py
-├── README.md
-└── anova_problem1.png
+The threshold used to determine statistical significance.
 
-anova_problem1.png is generated by the ANOVA cloud-provider example when the Python code is executed.
+```text
+α = 0.05
+```
 
-▶️ How to Run
+means we use a 5% significance level.
 
-1. Clone the repository
+## p-value
 
-git clone https://github.com/your-username/hypothesis-testing.git
-cd hypothesis-testing
+The probability of observing a result as extreme as, or more extreme than, the observed result assuming H₀ is true.
 
-2. Install dependencies
+---
 
-pip install numpy pandas scipy statsmodels matplotlib
+# ⚠️ Type I and Type II Errors
 
-3. Run the Python file
+### Type I Error
 
-python hypothesis_testing_problem_statements.py
+Rejecting H₀ when H₀ is actually true.
 
-You can also open the file in Jupyter Notebook or Google Colab and execute the examples step by step.
+```text
+False Positive
+```
 
-📈 Key Statistical Concepts
+### Type II Error
 
-Z-Test
+Failing to reject H₀ when H₀ is actually false.
 
-Used in this project for situations where the population standard deviation is known and the sample size is large.
+```text
+False Negative
+```
 
-T-Test
+### Statistical Power
 
-Used when the population standard deviation is unknown, especially for smaller samples.
+```text
+Power = 1 - β
+```
 
-ANOVA
+where β represents the probability of a Type II error.
 
-Used to compare the means of three or more independent groups.
+---
 
-Chi-Squared Test
+# 💻 Example Python
 
-Used to determine whether two categorical variables are statistically associated.
+```python
+from statsmodels.stats.weightstats import ztest
+import numpy as np
 
-💡 Key Learning
+np.random.seed(42)
 
-This project demonstrates how statistical testing can be used to move from sample data to evidence-based decisions.
+design_a_aov = np.random.normal(
+    loc=120,
+    scale=15,
+    size=200
+)
 
-The main learning points include:
+design_b_aov = np.random.normal(
+    loc=125,
+    scale=18,
+    size=200
+)
 
-Formulating business questions as statistical hypotheses
+z_stat, p_value = ztest(
+    design_a_aov,
+    design_b_aov,
+    value=0
+)
 
-Selecting an appropriate statistical test
+alpha = 0.05
 
-Checking assumptions before testing
+print(f"Z-Statistic: {z_stat:.4f}")
+print(f"P-Value: {p_value:.4f}")
 
-Understanding p-values and significance levels
+if p_value < alpha:
+    print("Reject Null Hypothesis")
+    print("There is a significant difference in AOV.")
+else:
+    print("Fail to Reject Null Hypothesis")
+    print("No significant difference found.")
+```
 
-Interpreting one-tailed and two-tailed tests
+---
 
-Making decisions using statistical evidence
+# 🎯 Key Learning
 
-Translating statistical results into business conclusions
+This project helped me understand how **statistical hypothesis testing** can be applied to real-world business problems.
 
-🎯 Business Decision-Making Example
+Through these examples, I practiced:
 
-In the StyleHub A/B testing example, Design B may show a higher AOV than Design A. However, a higher sample average alone does not prove that the new design performs better.
+* Translating business problems into statistical hypotheses
+* Selecting the appropriate statistical test
+* Understanding one-tailed and two-tailed tests
+* Calculating test statistics
+* Interpreting p-values
+* Checking statistical assumptions
+* Making data-driven conclusions
+* Connecting statistical results with business decisions
 
-If the p-value is greater than 0.05, the difference is not statistically significant. In that situation, the correct statistical conclusion is to fail to reject H₀ rather than claim that Design B is better.
+---
 
-From a business perspective, the company could continue collecting data or run a longer experiment before making a final rollout decision.
+# 🚀 Future Improvements
 
-👨‍💻 Author
+* Add confidence intervals
+* Add effect size calculations
+* Add power analysis
+* Add post-hoc tests for ANOVA
+* Add interactive visualizations
+* Add more real-world datasets
+* Build a Power BI dashboard for selected experiments
 
-Tinku Payal
+---
 
-Data Analytics | Python | SQL | Statistics | Power BI
+# 👨‍💻 Author
+
+**Tinku Payal**
+
+Aspiring Data Analyst | Python | SQL | Statistics | Power BI
+
+Currently building practical skills in **Data Analytics, Python, SQL, Statistics, and Power BI**.
+
+---
+
+## ⭐ If you find this project useful
+
+Feel free to ⭐ star the repository and explore the Python examples.
+
